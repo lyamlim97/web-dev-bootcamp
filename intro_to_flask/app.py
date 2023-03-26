@@ -3,6 +3,14 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
+class GalileanMoons:
+    def __init__(self, first, second, third, fourth):
+        self.first = first
+        self.second = second
+        self.third = third
+        self.fourth = fourth
+
+
 @app.route('/')
 def hello_world():
     return render_template('jinja_intro.html', name='Bob Smith', template_name='Jinja2')
@@ -38,3 +46,32 @@ def render_expressions():
     }
 
     return render_template('expressions.html', **kwargs)
+
+
+@app.route('/data-structures/')
+def render_data_structures():
+
+    # lists
+    movies = [
+        'Leon the Professional',
+        'The Usual Suspects',
+        'A Beautiful Mind'
+    ]
+
+    # dictionary
+    car = {
+        'brand': 'Tesla',
+        'model': 'Roadster',
+        'year': '2020'
+    }
+
+    # custom data structure (class)
+    moons = GalileanMoons('Io', 'Europa', 'Ganymede', 'Callisto')
+
+    kwargs = {
+        'movies': movies,
+        'car': car,
+        'moons': moons,
+    }
+
+    return render_template('data_structures.html', movies=movies, car=car, moons=moons)
