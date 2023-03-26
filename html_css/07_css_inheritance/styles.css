@@ -1,0 +1,15 @@
+/* original colour */
+.container {
+    color: orangered;
+}
+
+/* override colour */
+p {
+    color: blueviolet;
+
+}
+
+/* anchor tag inherits colour from the paragraph tag */
+a {
+    color: inherit;
+}
