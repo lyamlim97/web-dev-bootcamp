@@ -1,0 +1,25 @@
+/* targets all of the li elements in the ul element except a */
+ul li {
+    color: orangered;
+}
+
+/* target the a element only inside the li that is inside the ul */
+ul li a {
+    color: green
+}
+
+/* targets only the dt element that is a direct child of the dl element */
+dl>dt {
+    font-weight: 700;
+}
+
+
+/* select sibling element(s) of the label element that are after it */
+label~input {
+    padding: 5px 10px;
+}
+
+/* select one sibling element that is right after the label element */
+label+input {
+    padding: 10px 20px;
+}
