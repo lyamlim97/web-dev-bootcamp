@@ -75,3 +75,10 @@ def render_data_structures():
     }
 
     return render_template('data_structures.html', movies=movies, car=car, moons=moons)
+
+
+@app.route('/conditionals-basics/')
+def render_conditionals():
+    company = 'Microsoft'
+
+    return render_template('conditionals_basics.html', company=company)
