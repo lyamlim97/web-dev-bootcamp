@@ -82,3 +82,31 @@ def render_conditionals():
     company = 'Microsoft'
 
     return render_template('conditionals_basics.html', company=company)
+
+
+@app.route('/for-loop/')
+def render_loops_for():
+    planets = [
+        'Mercury',
+        'Venus',
+        'Earth',
+        'Mars',
+        'Jupyter',
+        'Saturn',
+        'Uranus',
+        'Neptune'
+    ]
+
+    return render_template('for_loops.html', planets=planets)
+
+
+@app.route('/for-loop/conditionals/')
+def render_for_loops_conditionals():
+    user_os = {
+        'Bob Miller': 'Windows',
+        'Judy Lee': 'MacOS',
+        'Zach Ng': 'Linux',
+        'Regina George': 'Windows'
+    }
+
+    return render_template('loops_and_conditionals.html', user_os=user_os)
