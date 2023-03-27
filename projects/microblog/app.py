@@ -1,15 +1,17 @@
+import os
 import datetime
-import json
 from flask import Flask, render_template, request
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
-with open('secrets.json', 'r') as read_file:
-    secrets = json.load(read_file)
+
+load_dotenv()
 
 
 def create_app():
     app = Flask(__name__)
-    client = MongoClient(secrets["MONGODB_URL"])
+
+    client = MongoClient(os.environ.get('MONGODB_URI'))
     app.db = client.microblog
 
     @app.route("/", methods=['GET', 'POST'])
@@ -17,6 +19,8 @@ def create_app():
         if request.method == 'POST':
             entry_content = request.form.get('content')
             formatted_date = datetime.datetime.today().strftime('%Y-%m-%d')
+            app.db.entries.insert_one(
+                {'content': entry_content, 'date': formatted_date})
 
         entries_with_date = [
             (
