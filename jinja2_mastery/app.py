@@ -6,5 +6,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def todo():
-    todos = ['Get milk', 'Learn programming']
+    todos = [
+        ("Get milk", False),
+        ("Learn programming", True)
+    ]
     return render_template('home.html', todos=todos)
