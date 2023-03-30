@@ -1,9 +1,11 @@
 import datetime
+from collections import defaultdict
 
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__)
 habits = ['Test Habit', 'New Habit']
+completions = defaultdict(list)
 
 
 @app.context_processor
@@ -22,13 +24,24 @@ def index():
         selected_date = datetime.date.fromisoformat(date_str)
     else:
         selected_date = datetime.date.today()
-    return render_template('index.html', habits=habits, title='Habit Tracker - Home', selected_date=selected_date)
+    return render_template('index.html', habits=habits, title='Habit Tracker - Home', selected_date=selected_date,
+                           completions=completions[selected_date])
 
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_habit():
-    if request.method == 'POST':
+    if request.form:
         habit = request.form.get('habit')
         habits.append(habit)
 
     return render_template('add_habit.html', title='Habit Tracker - Add Habit', selected_date=datetime.date.today())
+
+
+@app.route('/complete', methods=['POST'])
+def complete():
+    date_string = request.form.get('date')
+    date = datetime.date.fromisoformat(date_string)
+    habit = request.form.get('habitName')
+    completions[date].append(habit)
+
+    return redirect(url_for('index', date=date_string))
