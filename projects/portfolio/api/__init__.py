@@ -9,7 +9,7 @@ projects = [
         'hero': 'img/habit-tracking-hero.png',
         'categories': ['python', 'mongodb'],
         'slug': 'habit-tracking',
-        'prod': 'www.google.com',
+        'prod': 'https://habit-tracker-dvgmj0wp5-lyamlim97.vercel.app/',
     },
     {
         'name': 'Microblog app with Python and MongoDB',
@@ -17,7 +17,7 @@ projects = [
         'hero': 'img/personal-finance.png',
         'categories': ['python', 'mongodb', 'writing'],
         'slug': 'microblog',
-        'prod': 'www.google.com',
+        'prod': '',
     }
 ]
 
