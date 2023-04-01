@@ -22,9 +22,20 @@ def protected():
     return render_template('protected.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    email = ''
+
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if users.get(email) == password:
+            session['email'] = email
+            return redirect(url_for('protected'))
+        flash('Incorrect e-mail or password.')
+
+    return render_template('login.html', email=email)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -35,6 +46,6 @@ def signup():
         users[email] = password
         session['email'] = email
         flash('Successfully signed up.')
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
 
     return render_template('signup.html')
