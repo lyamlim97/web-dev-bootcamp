@@ -16,6 +16,17 @@ body {
   padding: 8px;
 }
 
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "content"
+      "footer";
+  }
+}
+
 .header {
   grid-area: header;
 }
