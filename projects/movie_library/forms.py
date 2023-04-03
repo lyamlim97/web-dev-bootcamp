@@ -49,3 +49,9 @@ class RegisterForm(FlaskForm):
         'password', message='This password does not match the one in the password field.')])
 
     submit = SubmitField('Register')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[InputRequired(), Email()])
+    password = PasswordField('Password', validators=[InputRequired()])
+    submit = SubmitField('Login')
