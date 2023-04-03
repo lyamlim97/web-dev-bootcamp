@@ -12,7 +12,9 @@ pages = Blueprint('pages', __name__,
 
 @pages.route('/')
 def index():
-    return render_template('index.html', title='Movies Watchlist')
+    movie_data = current_app.db.movie.find({})
+    movies = [Movie(**movie) for movie in movie_data]
+    return render_template('index.html', title='Movies Watchlist', movies_data=movies)
 
 
 @pages.route('/add', methods=['POST', 'GET'])
@@ -36,4 +38,5 @@ def toggle_theme():
         session['theme'] = 'light'
     else:
         session['theme'] = 'dark'
+
     return redirect(request.args.get('current_page'))
